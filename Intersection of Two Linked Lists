@@ -1,0 +1,19 @@
+#include<unordered_set>
+using namespace std;
+Node* findIntersection(Node* firstHead, Node* secondHead) {
+    std::unordered_set<Node*> nodes;
+
+    while (firstHead != NULL) {
+        nodes.insert(firstHead);
+        firstHead = firstHead->next;
+    }
+
+    while (secondHead != NULL) {
+        if (nodes.find(secondHead) != nodes.end()) {
+            return secondHead;
+        }
+        secondHead = secondHead->next;
+    }
+
+    return NULL;
+}
