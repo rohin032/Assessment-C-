@@ -1,0 +1,26 @@
+Node<int>* sortTwoLists(Node<int>* first, Node<int>* second) {
+    Node<int>* head = nullptr;
+
+    if (first != nullptr && (second == nullptr || first->data < second->data)) {
+        head = new Node<int>(first->data);
+        first = first->next;
+    } else if (second != nullptr) {
+        head = new Node<int>(second->data);
+        second = second->next;
+    }
+
+    Node<int>* temp = head;
+
+    while (first != nullptr || second != nullptr) {
+        if (first == nullptr || (second != nullptr && first->data > second->data)) {
+            temp->next = new Node<int>(second->data);
+            second = second->next;
+        } else if (second == nullptr || (first != nullptr && first->data <= second->data)) {
+            temp->next = new Node<int>(first->data);
+            first = first->next;
+        }
+        temp = temp->next;
+    }
+
+    return head;
+}
